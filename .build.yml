@@ -1,0 +1,21 @@
+image: alpine/edge
+sources:
+  - git@git.sr.ht:~fmrsn/citools
+  - git@git.sr.ht:~fmrsn/www
+secrets:
+  - 270fb008-0636-482b-880e-d6c2472ada6c
+oauth: pages.sr.ht/PAGES:RW
+environment:
+  PATH: /bin:/usr/bin:/home/build/citools/bin
+  SITE: fmrsn.com
+tasks:
+  - build: |
+      cd www
+      make -e
+  - deploy: |
+      cd www/public
+      tar -czf- . | acurl -f -Fcontent=@- https://pages.sr.ht/publish/$SITE
+triggers:
+  - action: email
+    condition: failure
+    to: F. Emerson <fmrsn@fmrsn.com>

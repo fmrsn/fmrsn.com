@@ -1,0 +1,12 @@
+#!/bin/sh -eu
+
+rm -rf public
+cp -r static public
+cd public
+
+sed -e "s/@SITE@/$SITE/g" -e "s/@LASTMOD@/$(date -u +%F)/g" ../templates/sitemap.xml >sitemap.xml
+sed -e "s/@SITE@/$SITE/g" ../templates/robots.txt >robots.txt
+sed -e "s/@SITE@/$SITE/g" ../templates/index.html >index.html
+
+chmod -R 0644 *
+minify -ro . .
