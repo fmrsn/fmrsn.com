@@ -14,7 +14,7 @@ tasks:
       make -e
   - deploy: |
       cd www/public
-      tar -czf- . | acurl -f -Fcontent=@- https://pages.sr.ht/publish/$SITE
+      tar -czf- . | acurl -fs -Fcontent=@- https://pages.sr.ht/publish/$SITE
 triggers:
   - action: email
     condition: failure
