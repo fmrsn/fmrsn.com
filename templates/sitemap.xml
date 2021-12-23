@@ -1,7 +1,7 @@
 <urlset>
 	<url>
-		<loc>https://@SITE@/</loc>
-		<lastmod>@LASTMOD@</lastmod>
+		<loc>https://@site@/</loc>
+		<lastmod>@lastmod@</lastmod>
 		<priority>0.8</priority>
 	</url>
 </urlset>

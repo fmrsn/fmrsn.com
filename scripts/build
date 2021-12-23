@@ -1,12 +1,31 @@
-#!/bin/sh -eu
+#!/bin/sh
+
+set -eu
+
+asdatauri() {
+	mime=$(file -b --mime-type "$1")
+	printf 'data:%s;base64,' "$mime"
+	openssl base64 -e -A -in "$1"
+}
 
 rm -rf public
 cp -r static public
 cd public
 
-sed -e "s/@SITE@/$SITE/g" -e "s/@LASTMOD@/$(date -u +%F)/g" ../templates/sitemap.xml >sitemap.xml
-sed -e "s/@SITE@/$SITE/g" ../templates/robots.txt >robots.txt
-sed -e "s/@SITE@/$SITE/g" ../templates/index.html >index.html
+site="$1"
+favicon=$(asdatauri ../templates/favicon.png)
+avatar=$(asdatauri ../templates/avatar.jpg)
+
+sed \
+	-e "s|@avatar@|$avatar|g" \
+	-e "s|@favicon@|$favicon|g" \
+	-e "s|@site@|$site|g" \
+	../templates/index.html >index.html
+sed -e "s|@site@|$site|g" ../templates/robots.txt >robots.txt
+sed \
+	-e "s|@site@|$site|g" \
+	-e "s|@lastmod@|$(date -u +%F)|g" \
+	../templates/sitemap.xml >sitemap.xml
 
 chmod -R 0644 *
 minify -ro . .

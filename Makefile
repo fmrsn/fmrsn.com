@@ -6,7 +6,7 @@ SITE = localhost:8000
 build: public FORCE
 
 public:
-	SITE=$(SITE) ./scripts/build
+	./scripts/build $(SITE)
 
 clean: FORCE
 	rm -rf public
@@ -14,7 +14,7 @@ clean: FORCE
 watch: FORCE
 	set +e; \
 	while true; do \
-		find scripts static templates | entr -d -- $(MAKE) clean public; \
+		find scripts static templates | entr -d -- $(MAKE) clean build; \
 	done
 
 serve: public FORCE
