@@ -1,4 +1,4 @@
-image: alpine/edge
+image: alpine/latest
 sources:
   - git@git.sr.ht:~fmrsn/citools
   - git@git.sr.ht:~fmrsn/www
