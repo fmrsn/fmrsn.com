@@ -7,14 +7,13 @@ secrets:
 oauth: pages.sr.ht/PAGES:RW
 environment:
   PATH: /bin:/usr/bin:/home/build/citools/bin
-  SITE: fmrsn.com
 tasks:
   - build: |
       cd www
-      make -e
+      ./build
   - deploy: |
       cd www/public
-      tar -czf- . | acurl -fs -Fcontent=@- https://pages.sr.ht/publish/$SITE
+      tar -czf- . | acurl -fs -Fcontent=@- https://pages.sr.ht/publish/fmrsn.com
 triggers:
   - action: email
     condition: failure

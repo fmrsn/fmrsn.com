@@ -1,6 +1,4 @@
-#!/bin/sh
-
-set -eu
+#!/bin/sh -eu
 
 asdatauri() {
 	mime=$(file -b --mime-type "$1")
@@ -12,18 +10,14 @@ rm -rf public
 cp -r static public
 cd public
 
-site="$1"
 favicon=$(asdatauri ../templates/favicon.png)
 avatar=$(asdatauri ../templates/avatar.jpg)
 
 sed \
 	-e "s|@avatar@|$avatar|g" \
 	-e "s|@favicon@|$favicon|g" \
-	-e "s|@site@|$site|g" \
 	../templates/index.html >index.html
-sed -e "s|@site@|$site|g" ../templates/robots.txt >robots.txt
 sed \
-	-e "s|@site@|$site|g" \
 	-e "s|@lastmod@|$(date -u +%F)|g" \
 	../templates/sitemap.xml >sitemap.xml
 
