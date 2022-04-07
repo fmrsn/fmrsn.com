@@ -10,7 +10,7 @@ environment:
 tasks:
   - build: |
       cd www
-      ./build
+      make
   - deploy: |
       cd www/public
       tar -czf- . | acurl -fs -Fcontent=@- https://pages.sr.ht/publish/fmrsn.com

@@ -1,3 +1,14 @@
+set -eu
+
+dataurify() {
+	mimetype=$(file -bN --mime-type "$1")
+	content=$(openssl base64 -e -A -in "$1")
+	printf 'data:%s;base64,%s' "$mimetype" "$content"
+}
+
+dir=$(CDPATH='' cd -- "$(dirname "$0")" && pwd)
+
+cat <<EOF
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -5,7 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <meta name="author" content="F. Emerson">
 <meta name="description" content="The web home of F. Emerson.">
-<link rel="shortcut icon" href="@favicon@">
+<link rel="shortcut icon" href="$(dataurify "$dir/favicon.png")">
 <link rel="canonical" href="https://fmrsn.com/" />
 <style>
 	*,
@@ -91,20 +102,18 @@
 <title>F. Emerson</title>
 <article>
 	<h1>F. Emerson</h1>
-	<img alt="F. Emerson's avatar" src="@avatar@">
+	<img alt="F. Emerson's avatar" src="$(dataurify "$dir/avatar.jpg")">
 	<dl>
 		<dt>Email</dt>
 		<dd><a href="mailto:fmrsn@fmrsn.com">fmrsn@fmrsn.com</a></dd>
-		<dt>Writing</dt>
-		<dd><a href="https://staticwords.com/">Static Words</a></dd>
-		<dt>Consultancy</dt>
-		<dd><a href="https://tria.systems/">Tria</a></dd>
 		<dt>LinkedIn</dt>
 		<dd><a href="https://www.linkedin.com/in/fmrsn">F. Emerson</a></dd>
-		<dt>sourcehut</dt>
-		<dd><a href="https://sr.ht/~fmrsn">~fmrsn</a></dd>
-		<dt>GitHub</dt>
-		<dd><a href="https://github.com/fmrsn">fmrsn</a></dd>
+		<dt>Consultancy</dt>
+		<dd><a href="https://tria.systems/">Tria</a></dd>
+		<dt>Projects</dt>
+		<dd><a href="https://bsid.es/">B-Sides</a></dd>
+		<dt>Writing</dt>
+		<dd><a href="https://staticwords.com/">Static Words</a></dd>
 	</dl>
 </article>
 <script>
@@ -117,3 +126,4 @@
 	})(window, document);
 </script>
 </html>
+EOF
