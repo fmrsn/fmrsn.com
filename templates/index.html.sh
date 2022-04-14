@@ -48,7 +48,7 @@ cat <<EOF
 	img {
 		width: 256px;
 		height: 256px;
-		margin-bottom: 3rem;
+		margin-bottom: 1.5rem;
 	}
 	@media (min-width: 720px) {
 		article {
@@ -57,7 +57,7 @@ cat <<EOF
 		}
 		img {
 			margin-bottom: 0;
-			margin-right: 3rem;
+			margin-right: 1.5rem;
 		}
 	}
 	dl {
@@ -71,6 +71,16 @@ cat <<EOF
 	}
 	dd {
 		grid-column-start: 2;
+	}
+	ul {
+		list-style: none;
+	}
+	li {
+		display: inline-flex;
+	}
+	li:not(:last-child)::after {
+		content: ' · ';
+		white-space: pre-wrap;
 	}
 	a {
 		color: currentColor;
@@ -87,16 +97,31 @@ cat <<EOF
 	<h1>F. Emerson</h1>
 	<img alt="F. Emerson's avatar" src="$(dataurify "$dir/avatar.jpg")">
 	<dl>
-		<dt>Email</dt>
-		<dd><a href="mailto:fmrsn@fmrsn.com">fmrsn@fmrsn.com</a></dd>
-		<dt>LinkedIn</dt>
-		<dd><a href="https://www.linkedin.com/in/fmrsn">F. Emerson</a></dd>
-		<dt>Consultancy</dt>
-		<dd><a href="https://tria.systems/">Tria</a></dd>
-		<dt>Projects</dt>
-		<dd><a href="https://bsid.es/">B-Sides</a></dd>
 		<dt>Writing</dt>
-		<dd><a href="https://staticwords.com/">Static Words</a></dd>
+		<dd>
+			<ul>
+				<li><a href="https://staticwords.com/">Static Words</a>
+			</ul>
+		</dd>
+		<dt>Projects</dt>
+		<dd>
+			<ul>
+				<li><a href="https://bsid.es/">B-Sides</a>
+			</ul>
+		</dd>
+		<dt>Consultancy</dt>
+		<dd>
+			<ul>
+				<li><a href="https://tria.systems/">Tria</a>
+			</ul>
+		</dd>
+		<dt>Contact</dt>
+		<dd>
+			<ul>
+				<li><a href="mailto:fmrsn@fmrsn.com">Email</a>
+				<li><a href="https://www.linkedin.com/in/fmrsn">LinkedIn</a>
+			</ul>
+		</dd>
 	</dl>
 </article>
 <script>
