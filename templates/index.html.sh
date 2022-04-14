@@ -17,85 +17,68 @@ cat <<EOF
 <meta name="author" content="F. Emerson">
 <meta name="description" content="The web home of F. Emerson.">
 <link rel="shortcut icon" href="$(dataurify "$dir/favicon.png")">
-<link rel="canonical" href="https://fmrsn.com/" />
+<link rel="canonical" href="https://$SITE/" />
 <style>
-	*,
-	::before,
-	::after {
+	*, ::before, ::after {
 		box-sizing: border-box;
 		margin: 0;
 		padding: 0;
 	}
-
 	html {
-		font-family: "IBM Plex Sans", "FiraGO", "Fira Sans", sans-serif;
+		font-family: sans-serif;
 		font-size: 16px;
 		line-height: 1.5;
 	}
-
 	body {
 		display: flex;
 		padding: 1.5rem;
 		height: 100vh;
 		height: var(--wh, 100vh);
 	}
-
 	article {
 		margin: auto;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 	}
-
 	h1 {
 		position: absolute;
 		clip: rect(0, 0, 0, 0);
 	}
-
 	img {
 		width: 256px;
 		height: 256px;
 		margin-bottom: 3rem;
 	}
-
 	@media (min-width: 720px) {
 		article {
 			flex-direction: row;
 			align-items: center;
 		}
-
 		img {
 			margin-bottom: 0;
 			margin-right: 3rem;
 		}
 	}
-
 	dl {
 		display: grid;
 		grid-template-columns: max-content auto;
 		column-gap: 1.5rem;
 	}
-
 	dt {
 		grid-column-start: 1;
 		text-align: right;
 	}
-
 	dd {
 		grid-column-start: 2;
 	}
-
 	a {
 		color: currentColor;
 	}
-
-	a:link,
-	a:visited {
+	a:link, a:visited {
 		text-decoration-color: darkgray;
 	}
-
-	a:hover,
-	a:active {
+	a:hover, a:active {
 		text-decoration-color: currentColor;
 	}
 </style>
