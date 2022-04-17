@@ -12,14 +12,18 @@ environment:
   SITE: fmrsn.com
 tasks:
   - build: |
-      cd "$SITE"
+      cd fmrsn.com
       ./build.sh
   - package: |
-      cd "$SITE"/public
+      cd fmrsn.com/public
       tar -czf ../site.tar.gz .
   - deploy: |
-      cd "$SITE"
+      cd fmrsn.com
       hut pages publish -d "$SITE" site.tar.gz
+  - mirror: |
+      ssh-keyscan github.com >>"$HOME"/.ssh/known_hosts
+      cd fmrsn.com
+      git push --mirror git@github.com:fmrsn/fmrsn.com
 triggers:
   - action: email
     condition: failure
