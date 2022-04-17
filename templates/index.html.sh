@@ -1,5 +1,3 @@
-set -eu
-
 dataurify() {
 	mimetype=$(file -bN --mime-type "$1")
 	content=$(openssl base64 -e -A -in "$1")
@@ -106,6 +104,7 @@ cat <<EOF
 		<dt>Projects</dt>
 		<dd>
 			<ul>
+				<li><a href="https://sr.ht/~fmrsn">Sourcehut</a>
 				<li><a href="https://bsid.es/">B-Sides</a>
 			</ul>
 		</dd>

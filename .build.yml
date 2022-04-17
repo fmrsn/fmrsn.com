@@ -1,4 +1,6 @@
-image: alpine/latest
+image: alpine/edge
+packages:
+  - hut
 sources:
   - git@git.sr.ht:~fmrsn/citools
   - git@git.sr.ht:~fmrsn/fmrsn.com
@@ -10,11 +12,14 @@ environment:
   SITE: fmrsn.com
 tasks:
   - build: |
-      cd $SITE
+      cd "$SITE"
       ./build.sh
+  - package: |
+      cd "$SITE"/public
+      tar -czf ../site.tar.gz .
   - deploy: |
-      cd $SITE/public
-      tar -czf- . | acurl -fs -Fcontent=@- https://pages.sr.ht/publish/$SITE
+      cd "$SITE"
+      hut pages publish -d "$SITE" site.tar.gz
 triggers:
   - action: email
     condition: failure
