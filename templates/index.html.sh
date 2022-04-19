@@ -23,7 +23,7 @@ cat <<EOF
 		padding: 0;
 	}
 	html {
-		font-family: sans-serif;
+		font-family: "FiraGO", "Fira Sans", sans-serif;
 		font-size: 16px;
 		line-height: 1.5;
 		hyphens: auto;
