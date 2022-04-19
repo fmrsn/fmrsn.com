@@ -1,29 +1,40 @@
 image: alpine/edge
+arch: x86_64
 packages:
   - hut
 sources:
-  - git@git.sr.ht:~fmrsn/citools
   - git@git.sr.ht:~fmrsn/fmrsn.com
 secrets:
   - 270fb008-0636-482b-880e-d6c2472ada6c
 oauth: pages.sr.ht/PAGES:RW
 environment:
-  PATH: /bin:/usr/bin:/home/build/citools/bin
+  PATH: /home/build/bin:/bin:/usr/bin
   SITE: fmrsn.com
+  minify_version: v2.11.1
+  minify_checksum: 826cb78ddc91f61553399b8649fabab816bb90e8e43d8c111fff462ee331e4c5
 tasks:
+  - install_minify: |
+      wget -q https://github.com/tdewolff/minify/releases/download/$minify_version/minify_linux_amd64.tar.gz
+      sha256sum -c <<EOF
+      $minify_checksum  minify_linux_amd64.tar.gz
+      EOF
+      mkdir -p bin
+      cd bin
+      tar -xzf ../minify_linux_amd64.tar.gz minify
+      chmod +x minify
   - build: |
-      cd fmrsn.com
+      cd $SITE
       ./build.sh
   - package: |
-      cd fmrsn.com/public
+      cd $SITE/public
       tar -czf ../site.tar.gz .
   - deploy: |
-      cd fmrsn.com
+      cd $SITE
       hut pages publish -d "$SITE" site.tar.gz
   - mirror: |
       ssh-keyscan github.com >>"$HOME"/.ssh/known_hosts
-      cd fmrsn.com
-      git push --mirror git@github.com:fmrsn/fmrsn.com
+      cd $SITE
+      git push --mirror git@github.com:fmrsn/$SITE
 triggers:
   - action: email
     condition: failure
