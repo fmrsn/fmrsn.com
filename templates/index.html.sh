@@ -43,8 +43,6 @@ cat <<EOF
 	img {
 		display: block;
 		margin: auto;
-		width: 256px;
-		height: 256px;
 	}
 	p, ul {
 		margin-top: 1.5rem;
