@@ -25,20 +25,20 @@ cat <<EOF
 	html {
 		font-family: "FiraGO", "Fira Sans", sans-serif;
 		font-size: 16px;
-		line-height: 1.5;
 		hyphens: auto;
 		-moz-hyphens: auto;
 		-webkit-hyphens: auto;
 		-ms-hyphens: auto;
+		line-height: 1.5;
 	}
 	body {
 		margin: auto;
-		padding: 1.5rem;
 		max-width: 33rem;
+		padding: 1.5rem;
 	}
 	h1 {
-		position: absolute;
 		clip: rect(0, 0, 0, 0);
+		position: absolute;
 	}
 	img {
 		display: block;
