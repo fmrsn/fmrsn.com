@@ -15,7 +15,7 @@ cat <<EOF
 <meta name="author" content="F. Emerson">
 <meta name="description" content="The web home of F. Emerson.">
 <link rel="shortcut icon" href="$(dataurify "$dir/favicon.png")">
-<link rel="canonical" href="https://$SITE/" />
+<link rel="canonical" href="https://$SITE" />
 <style>
 	*, ::before, ::after {
 		box-sizing: border-box;
@@ -26,111 +26,47 @@ cat <<EOF
 		font-family: sans-serif;
 		font-size: 16px;
 		line-height: 1.5;
+		hyphens: auto;
+		-moz-hyphens: auto;
+		-webkit-hyphens: auto;
+		-ms-hyphens: auto;
 	}
 	body {
-		display: flex;
-		padding: 1.5rem;
-		height: 100vh;
-		height: var(--wh, 100vh);
-	}
-	article {
 		margin: auto;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
+		padding: 1.5rem;
+		max-width: 33rem;
 	}
 	h1 {
 		position: absolute;
 		clip: rect(0, 0, 0, 0);
 	}
 	img {
+		display: block;
+		margin: auto;
 		width: 256px;
 		height: 256px;
-		margin-bottom: 1.5rem;
 	}
-	@media (min-width: 720px) {
-		article {
-			flex-direction: row;
-			align-items: center;
-		}
-		img {
-			margin-bottom: 0;
-			margin-right: 1.5rem;
-		}
-	}
-	dl {
-		display: grid;
-		grid-template-columns: max-content auto;
-		column-gap: 1.5rem;
-	}
-	dt {
-		grid-column-start: 1;
-		text-align: right;
-	}
-	dd {
-		grid-column-start: 2;
+	p, ul {
+		margin-top: 1.5rem;
 	}
 	ul {
-		list-style: none;
-	}
-	li {
-		display: inline-flex;
-	}
-	li:not(:last-child)::after {
-		content: ' · ';
-		white-space: pre-wrap;
+		padding-left: 1.5rem;
 	}
 	a {
 		color: currentColor;
-	}
-	a:link, a:visited {
-		text-decoration-color: darkgray;
-	}
-	a:hover, a:active {
-		text-decoration-color: currentColor;
 	}
 </style>
 <title>F. Emerson</title>
 <article>
 	<h1>F. Emerson</h1>
 	<img alt="F. Emerson's avatar" src="$(dataurify "$dir/avatar.jpg")">
-	<dl>
-		<dt>Writing</dt>
-		<dd>
-			<ul>
-				<li><a href="https://staticwords.com/">Static Words</a>
-			</ul>
-		</dd>
-		<dt>Projects</dt>
-		<dd>
-			<ul>
-				<li><a href="https://sr.ht/~fmrsn">SourceHut</a>
-				<li><a href="https://bsid.es/">B-Sides</a>
-			</ul>
-		</dd>
-		<dt>Consultancy</dt>
-		<dd>
-			<ul>
-				<li><a href="https://tria.systems/">Tria</a>
-			</ul>
-		</dd>
-		<dt>Contact</dt>
-		<dd>
-			<ul>
-				<li><a href="mailto:fmrsn@fmrsn.com">Email</a>
-				<li><a href="https://www.linkedin.com/in/fmrsn">LinkedIn</a>
-			</ul>
-		</dd>
-	</dl>
+	<p>Hi! I'm <strong>F. Emerson</strong>.
+	<ul>
+		<li>Writing: <a href="https://staticwords.com">Static Words</a>
+		<li>Code: <a href="https://sr.ht/~fmrsn">SourceHut</a>, <a href="https://bsid.es">B-Sides</a>
+		<li>Consultancy: <a href="https://tria.systems">Tria</a>
+		<li>Contact: <a href="mailto:fmrsn@fmrsn.com">Email</a>, <a href="https://www.linkedin.com/in/fmrsn">LinkedIn</a>
+	</ul>
 </article>
-<script>
-	(function(window, document) {
-		function onResize() {
-			document.documentElement.style.setProperty("--wh", window.innerHeight + "px");
-		}
-		onResize();
-		window.addEventListener("resize", onResize);
-	})(window, document);
-</script>
 </html>
 EOF
